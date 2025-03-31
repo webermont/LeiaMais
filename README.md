@@ -1,88 +1,153 @@
-# LeiaMais - Sistema de Gerenciamento de Biblioteca
+# LeiaMais - Sistema de Biblioteca
 
-Sistema moderno de gerenciamento de biblioteca desenvolvido com tecnologias web modernas.
+Sistema completo para gerenciamento de biblioteca, desenvolvido com React, TypeScript e Node.js.
 
-## Funcionalidades
+## 🚀 Tecnologias
 
-- ✨ Interface moderna e responsiva
-- 🌓 Suporte a tema claro e escuro
-- 📚 Gerenciamento completo de livros
-- 👥 Controle de usuários
-- 📋 Sistema de empréstimos
-- 📊 Relatórios e estatísticas
-- 🔒 Sistema de autenticação
-- 🌐 Interface em português brasileiro
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Node.js](https://nodejs.org/)
+- [Prisma](https://www.prisma.io/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
 
-## Tecnologias Utilizadas
+## 📋 Pré-requisitos
 
-- React
-- TypeScript
-- Tailwind CSS
-- Shadcn/ui
-- Vite
+Antes de começar, você precisa ter instalado em sua máquina:
 
-## Autor
+- [Node.js](https://nodejs.org/) (v18 ou superior)
+- [npm](https://www.npmjs.com/) (v9 ou superior)
+- [Git](https://git-scm.com/)
+- [MySQL](https://www.mysql.com/) (v8 ou superior)
 
-Wéber Monteiro
+## 🔧 Instalação
 
-## Status do Projeto
+1. Clone o repositório:
+```bash
+git clone https://github.com/webermont/LeiaMais.git
+cd LeiaMais
+```
 
-Em desenvolvimento - Versão 1.0.0
+2. Instale as dependências:
+```bash
+npm install
+```
 
-## Project info
+3. Configure as variáveis de ambiente:
+```bash
+cp .env.example .env
+```
 
-**URL**: https://lovable.dev/projects/b4f1e37e-ec03-4dd6-9686-f7648a1cb4c2
+4. Edite o arquivo `.env` com suas configurações:
+```env
+# API
+VITE_API_URL=http://localhost:3000
 
-## How can I edit this code?
+# Database
+DATABASE_URL="mysql://user:password@localhost:3306/leiamais"
 
-There are several ways of editing your application.
+# JWT
+JWT_SECRET="seu-segredo-aqui"
 
-**Use Lovable**
+# Email
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=seu-email@gmail.com
+SMTP_PASS=sua-senha-de-app
+```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b4f1e37e-ec03-4dd6-9686-f7648a1cb4c2) and start prompting.
+5. Execute as migrações do banco de dados:
+```bash
+npx prisma migrate dev
+```
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+6. Inicie o servidor de desenvolvimento:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+O sistema estará disponível em `http://localhost:5173`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🌙 Tema Escuro
 
-**Use GitHub Codespaces**
+O sistema suporta tema escuro e claro, que pode ser alternado através do botão na barra de navegação. O tema é salvo automaticamente e respeita a preferência do sistema operacional.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📱 Responsividade
 
-## How can I deploy this project?
+A interface é totalmente responsiva e se adapta a diferentes tamanhos de tela, desde dispositivos móveis até desktops.
 
-Simply open [Lovable](https://lovable.dev/projects/b4f1e37e-ec03-4dd6-9686-f7648a1cb4c2) and click on Share -> Publish.
+## 🔐 Autenticação
 
-## I want to use a custom domain - is that possible?
+O sistema utiliza autenticação JWT. Para o primeiro acesso, use:
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+- Email: admin@leiamais.com
+- Senha: admin123
+
+## 🧪 Testes
+
+Para executar os testes:
+
+```bash
+# Testes unitários
+npm test
+
+# Testes end-to-end
+npm run test:e2e
+
+# Testes end-to-end com interface
+npm run test:e2e:dev
+```
+
+## 📚 Documentação
+
+A documentação completa da API está disponível em:
+```bash
+http://localhost:5173/docs
+```
+
+## 📦 Scripts Disponíveis
+
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Gera a versão de produção
+- `npm run preview` - Visualiza a versão de produção localmente
+- `npm test` - Executa os testes unitários
+- `npm run test:e2e` - Executa os testes end-to-end
+- `npm run test:e2e:dev` - Executa os testes end-to-end com interface
+- `npm run lint` - Executa o linter
+
+## 🌟 Funcionalidades
+
+- ✅ Gerenciamento de livros
+- ✅ Controle de empréstimos
+- ✅ Sistema de multas automáticas
+- ✅ Notificações por email
+- ✅ Relatórios avançados
+- ✅ Tema escuro/claro
+- ✅ Interface responsiva
+- ✅ Autenticação segura
+- ✅ Proteção de rotas
+- ✅ Internacionalização (pt-BR)
+
+## 🤝 Contribuindo
+
+1. Faça o fork do projeto
+2. Crie sua branch de feature (`git checkout -b feature/AmazingFeature`)
+3. Faça commit das suas alterações (`git commit -m 'Add some AmazingFeature'`)
+4. Faça push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 👤 Autor
+
+**Wéber Monteiro**
+
+* Website: [webermonteiro.com.br](https://webermonteiro.com.br)
+* Github: [@webermont](https://github.com/webermont)
+* LinkedIn: [@webermonteiro](https://linkedin.com/in/webermonteiro)
+
+## ⭐️ Mostre seu apoio
+
+Dê uma ⭐️ se este projeto te ajudou!
