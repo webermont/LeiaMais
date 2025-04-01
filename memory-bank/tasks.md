@@ -2,23 +2,29 @@
 
 ## Em Andamento
 1. Sistema de Multas Automáticas
-   - Status: Em desenvolvimento
+   - Status: Concluído (Backend/Frontend/Testes)
    - Prioridade: Alta
-   - Progresso: 85%
-   - Responsável: Backend Team
+   - Progresso: 100%
+   - Responsável: Backend Team / Frontend Team
    - Detalhes:
      - ✅ Serviço de multas criado
      - ✅ Store de multas implementado
      - ✅ Componente de listagem criado
      - ✅ Backend implementado
      - ✅ Rotas criadas
-     - ⏳ Testes pendentes
+     - ✅ Testes implementados
 
 2. Notificações por Email
    - Status: Planejamento
    - Prioridade: Alta
    - Progresso: 0%
    - Responsável: Backend Team
+
+3. Ajustes Finais de Usabilidade e Tema Escuro
+   - Status: Em Andamento
+   - Prioridade: Média
+   - Progresso: 80% (Ajustes de contraste concluídos)
+   - Responsável: Frontend Team
 
 ## Pendentes
 1. Documentação da API
@@ -33,34 +39,37 @@
    - Progresso: 0%
    - Responsável: QA Team
 
-3. Ajustes do Tema Escuro
-   - Status: Pendente
-   - Prioridade: Baixa
-   - Progresso: 0%
+## Concluídas
+1. Exportação de Relatórios PDF
+   - Status: Concluído
+   - Data: 15/03/2024
    - Responsável: Frontend Team
 
-## Concluídas
-1. Implementação do Banco de Dados
+2. Correção de Erros de Router/Context
+   - Status: Concluído
+   - Data: 15/03/2024
+   - Responsável: Frontend Team
+
+3. Implementação do Banco de Dados
    - Status: Concluído
    - Data: 13/03/2024
    - Responsável: Backend Team
 
-2. Sistema de Tema Escuro
+4. Sistema de Tema Escuro (Implementação Inicial)
    - Status: Concluído
    - Data: 13/03/2024
    - Responsável: Frontend Team
 
-3. Tradução do Sistema
+5. Tradução do Sistema
    - Status: Concluído
    - Data: 13/03/2024
    - Responsável: Frontend Team
 
 ## Próximas Tarefas
-1. Implementar testes do sistema de multas
-2. Configurar sistema de email
-3. Documentar endpoints da API
-4. Criar testes E2E
-5. Refinar tema escuro
+1. Configurar sistema de email
+2. Documentar endpoints da API
+3. Criar testes E2E
+4. Revisão final de usabilidade (parte dos Ajustes Finais)
 
 ## Notas
 - Todas as tarefas devem seguir o padrão de código estabelecido

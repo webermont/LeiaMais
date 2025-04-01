@@ -14,6 +14,8 @@
 - Tailwind CSS: v3.x
 - Zustand: v4.x
 - shadcn/ui: Última versão
+- jspdf: Última versão
+- jspdf-autotable: Última versão
 
 ## Configuração do Ambiente
 1. Requisitos
