@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { PageTransition } from '@/components/PageTransition';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuthStore } from '@/store';
 import { useBooks } from '@/hooks/useBooks';
 import { useUsers } from '@/hooks/useUsers';
 import { useLoans } from '@/hooks/useLoans';
@@ -42,7 +42,7 @@ function RecentActivitySkeleton() {
 
 export function Dashboard() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user } = useAuthStore();
   const { books, loading: booksLoading } = useBooks();
   const { users, loading: usersLoading } = useUsers();
   const { loans, loading: loansLoading, getOverdueLoans } = useLoans();

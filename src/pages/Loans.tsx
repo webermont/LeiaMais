@@ -36,6 +36,7 @@ import { useUsers, User } from '@/hooks/useUsers';
 import { useLoans } from '@/hooks/useLoans';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
+import { Input } from '../components/ui/input';
 
 interface LoanWithDetails {
   id: number;
@@ -230,6 +231,7 @@ export function Loans() {
   const [isReturnDialogOpen, setIsReturnDialogOpen] = useState(false);
   const [selectedLoan, setSelectedLoan] = useState<LoanWithDetails | null>(null);
   const [activeTab, setActiveTab] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     if (!user) {
@@ -334,6 +336,12 @@ export function Loans() {
     },
   ];
 
+  const filteredSearchLoans = filteredLoans.filter(
+    (loan) =>
+      loan.bookTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      loan.userName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -423,9 +431,17 @@ export function Loans() {
             </TabsList>
             
             <TabsContent value={activeTab}>
+              <div className="flex justify-between items-center mb-6">
+                <Input
+                  placeholder="Buscar empréstimos..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-64"
+                />
+              </div>
               <DataTable 
                 columns={columns} 
-                data={filteredLoans} 
+                data={filteredSearchLoans} 
                 searchKey="bookTitle"
                 searchPlaceholder="Pesquisar por título do livro..."
               />

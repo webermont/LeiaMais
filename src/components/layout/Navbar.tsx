@@ -1,45 +1,84 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../ui/button';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuthStore } from '@/store';
 import { useTheme } from '../../hooks/useTheme';
 import { Sun, Moon } from 'lucide-react';
+import { ThemeSelector } from '../ThemeSelector';
 
 export function Navbar() {
-  const { user, signOut } = useAuth();
+  const { user, logout } = useAuthStore();
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+
+  const handleSignOut = () => {
+    logout();
+    localStorage.removeItem('leiamais.token');
+    localStorage.removeItem('leiamais.user');
+  };
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-sm border-b dark:border-gray-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex">
-            <div className="flex-shrink-0 flex items-center">
-              <Link to="/" className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
-                LeiaMais
-              </Link>
-            </div>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <Link
-                to="/books"
-                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 dark:text-gray-100"
-              >
-                Livros
-              </Link>
-              <Link
-                to="/loans"
-                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 dark:text-gray-100"
-              >
-                Empréstimos
-              </Link>
-              <Link
-                to="/reports"
-                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 dark:text-gray-100"
-              >
-                Relatórios
-              </Link>
-            </div>
+    <nav className="bg-white dark:bg-gray-800 shadow-md">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex items-center">
+            <Link to="/" className="text-xl font-bold text-gray-800 dark:text-white">
+              LeiaMais
+            </Link>
           </div>
+
           <div className="flex items-center space-x-4">
+            <Link
+              to="/"
+              className={`text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white ${
+                isActive('/') ? 'font-semibold' : ''
+              }`}
+            >
+              Início
+            </Link>
+            <Link
+              to="/books"
+              className={`text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white ${
+                isActive('/books') ? 'font-semibold' : ''
+              }`}
+            >
+              Livros
+            </Link>
+            {user && (
+              <>
+                <Link
+                  to="/loans"
+                  className={`text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white ${
+                    isActive('/loans') ? 'font-semibold' : ''
+                  }`}
+                >
+                  Empréstimos
+                </Link>
+                <Link
+                  to="/users"
+                  className={`text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white ${
+                    isActive('/users') ? 'font-semibold' : ''
+                  }`}
+                >
+                  Usuários
+                </Link>
+                <Link
+                  to="/reports"
+                  className={`text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white ${
+                    isActive('/reports') ? 'font-semibold' : ''
+                  }`}
+                >
+                  Relatórios
+                </Link>
+              </>
+            )}
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <ThemeSelector />
             <Button
               variant="ghost"
               size="icon"
@@ -56,23 +95,17 @@ export function Navbar() {
               </span>
             </Button>
             {user ? (
-              <div className="flex items-center space-x-4">
-                <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+              <>
+                <span className="text-gray-600 dark:text-gray-300">
                   {user.name}
                 </span>
-                <Button
-                  variant="outline"
-                  onClick={signOut}
-                  className="text-sm"
-                >
+                <Button variant="outline" onClick={handleSignOut}>
                   Sair
                 </Button>
-              </div>
+              </>
             ) : (
               <Link to="/login">
-                <Button variant="outline" className="text-sm">
-                  Entrar
-                </Button>
+                <Button>Entrar</Button>
               </Link>
             )}
           </div>

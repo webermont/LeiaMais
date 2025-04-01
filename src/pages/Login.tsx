@@ -5,14 +5,15 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuthStore } from '@/store';
+import { toast } from '@/hooks/use-toast';
 import { PageTransition } from '@/components/PageTransition';
 
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
+  const { setUser } = useAuthStore();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -20,10 +21,90 @@ export function Login() {
     setIsLoading(true);
     
     try {
-      await login(email, password);
-      // Login will handle redirection on success
+      // Mock login - check if user exists and password is correct
+      const mockUsers = [
+        {
+          id: 1,
+          name: 'Admin User',
+          email: 'admin@biblioteca.com',
+          role: 'admin' as const,
+          borrow_limit: 10,
+          borrow_duration: 30,
+          blocked_until: null,
+          block_reason: null,
+          active_loans: 0,
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: 2,
+          name: 'Librarian User',
+          email: 'bibliotecario@biblioteca.com',
+          role: 'librarian' as const,
+          borrow_limit: 5,
+          borrow_duration: 15,
+          blocked_until: null,
+          block_reason: null,
+          active_loans: 0,
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: 3,
+          name: 'Teacher User',
+          email: 'professor@biblioteca.com',
+          role: 'teacher' as const,
+          borrow_limit: 8,
+          borrow_duration: 20,
+          blocked_until: null,
+          block_reason: null,
+          active_loans: 0,
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+        {
+          id: 4,
+          name: 'Student User',
+          email: 'aluno@biblioteca.com',
+          role: 'student' as const,
+          borrow_limit: 3,
+          borrow_duration: 10,
+          blocked_until: null,
+          block_reason: null,
+          active_loans: 0,
+          created_at: new Date(),
+          updated_at: new Date(),
+        },
+      ];
+
+      const user = mockUsers.find(u => u.email === email);
+      
+      if (!user || password !== 'senha123') {
+        throw new Error('Credenciais inválidas');
+      }
+
+      // Mock token
+      const token = 'mock-token-' + Math.random().toString(36).substring(7);
+
+      localStorage.setItem('leiamais.token', token);
+      localStorage.setItem('leiamais.user', JSON.stringify(user));
+
+      setUser(user);
+      
+      toast({
+        title: 'Login realizado com sucesso',
+        description: `Bem-vindo(a), ${user.name}!`,
+      });
+      
+      navigate('/dashboard');
     } catch (error) {
-      // Error is handled in the login function
+      console.error('Erro ao fazer login:', error);
+      toast({
+        title: 'Falha no login',
+        description: error instanceof Error ? error.message : 'Ocorreu um erro durante o login',
+        variant: 'destructive',
+      });
+    } finally {
       setIsLoading(false);
     }
   };

@@ -7,6 +7,8 @@ import { Loans } from './pages/Loans';
 import { Reports } from './pages/Reports';
 import { Login } from './pages/Login';
 import { NotFound } from './pages/NotFound';
+import { Dashboard } from './pages/Dashboard';
+import { Users } from './pages/Users';
 
 export function Router() {
   return (
@@ -14,10 +16,12 @@ export function Router() {
       <Navbar />
       <main className="flex-1">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/books" element={<Books />} />
+          <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/books" element={<ProtectedRoute><Books /></ProtectedRoute>} />
           <Route path="/loans" element={<ProtectedRoute><Loans /></ProtectedRoute>} />
           <Route path="/reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
+          <Route path="/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

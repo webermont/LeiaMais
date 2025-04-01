@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from '@/hooks/useAuth';
 import { BooksProvider } from '@/hooks/useBooks';
 import { UsersProvider } from '@/hooks/useUsers';
@@ -17,6 +17,7 @@ import LoansPage from './pages/LoansPage';
 import { Router } from './Router';
 import './styles/globals.css';
 import { Toaster as ReactHotToaster } from 'react-hot-toast';
+import { themes } from './config/themes';
 
 // Pages
 import Login from "./pages/Login";
@@ -49,6 +50,8 @@ const ProtectedRoute = ({ children, roles }: { children: JSX.Element, roles?: Us
 
 const App = () => {
   const { theme } = useThemeStore();
+  const currentTheme = themes[theme];
+
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove('light', 'dark');
@@ -56,38 +59,36 @@ const App = () => {
   }, [theme]);
 
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <BrowserRouter>
-            <AuthProvider>
-              <BooksProvider>
-                <UsersProvider>
-                  <LoansProvider>
-                    <div className="min-h-screen bg-background">
-                      <Router />
-                      <ReactHotToaster
-                        position="top-right"
-                        toastOptions={{
-                          style: {
-                            background: 'var(--background)',
-                            color: 'var(--foreground)',
-                            border: '1px solid var(--border)',
-                          },
-                          duration: 3000,
-                        }}
-                      />
-                    </div>
-                    <Toaster />
-                    <Sonner />
-                  </LoansProvider>
-                </UsersProvider>
-              </BooksProvider>
-            </AuthProvider>
-          </BrowserRouter>
-        </TooltipProvider>
-      </QueryClientProvider>
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AuthProvider>
+          <BooksProvider>
+            <UsersProvider>
+              <LoansProvider>
+                <TooltipProvider>
+                  <div className={`theme-${theme}`}>
+                    <Router />
+                    <ReactHotToaster
+                      position="top-right"
+                      toastOptions={{
+                        style: {
+                          background: 'var(--background)',
+                          color: 'var(--foreground)',
+                          border: '1px solid var(--border)',
+                        },
+                        duration: 3000,
+                      }}
+                    />
+                  </div>
+                </TooltipProvider>
+              </LoansProvider>
+            </UsersProvider>
+          </BooksProvider>
+        </AuthProvider>
+      </BrowserRouter>
+      <Toaster />
+      <Sonner />
+    </QueryClientProvider>
   );
 };
 

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { User } from '@/types';
+import { themes, ThemeName } from '@/config/themes';
 
 interface AuthState {
   user: User | null;
@@ -28,14 +29,14 @@ export const useAuthStore = create<AuthState>()(
 );
 
 interface ThemeState {
-  theme: 'light' | 'dark' | 'system';
-  setTheme: (theme: 'light' | 'dark' | 'system') => void;
+  theme: ThemeName;
+  setTheme: (theme: ThemeName) => void;
 }
 
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
-      theme: 'system',
+      theme: 'gray',
       setTheme: (theme) => set({ theme }),
     }),
     {
